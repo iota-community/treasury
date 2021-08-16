@@ -43,6 +43,7 @@ Please submit your suggestions via pull request within [this](https://github.com
 - [ ] For the DAO with ISCP this will need to be extended into a full forum style discussion board where the community can communicate with the proposal submitters and discuss all topics related to the proposals. Phylo what was this about?
 - [ ] Finalize Firefly mock-ups
 - [ ] DRAFT Web DAO mock-ups
+- [ ] Hornet Node plugin - this needs to be still worked out more -  data sizes are too big; IMHO 1 MB proposal size is not useful. This is morelikely for the other RFC.
 
 ### IDEAS on UX/UI 
 * Proposals on DAO Website could be similar to Github Discussions: https://github.com/iota-community/Community-Governance/discussions
@@ -198,41 +199,70 @@ Main purpose is the ability for the user to cast their vote, change their vote a
 # High-level Technical Requirement
 In this section we highlight some of the key technical assumptions. This can be further expanded or changed down the track as required during the implementation. It's explained to help the builder understand mechanics and potentially direct them on possible approach.
 
-In summary, Firefly code changes should be minimal and should be primarily focused on ability "execute the vote". Any other functionality should be done within Web DAO.
+In summary, Firefly code changes should be minimal and should be primarily focused on ability "execute the vote". Any other functionality should be done within Web DAO. This will reduce security risks and allows us to quickly build up more features. 
 
-Items to be expanded:
-* Understand more in details how to store/access historical vote results (hornet permanode with voting plugin, github, etc.)
-  * * How does Firefly access historical data (i.e., connects to permanode)? - No permanode atm, so history gets lost in the nodes. Firefly stores what it knows in Stronghold atm. We could potentially save the Proposal history in Github - Database and Firefly access this with API*
-* How new proposals will detected within Github by Firefly? This is actually simple. Checking github proposal/ folder just needs to be expanded. 
-* Github calls from Firefly must be whitelisted.
-* No changes into wallet.rs should be required as it supports "no value" transactions
-* Any concerns opening external links from Firefly (to our Website). Need to be whitelisted beforehand
-* Hornet Node plugin - this needs to be still worked out more -  data sizes are too big; IMHO 1 MB proposal size is not useful. This is morelikely for the other RFC.
+## Middleware for proposal management
+> Ideally, middleware is only an intern solution before ISCP are implemented and ready to be used.
+
+Middleware management tool will have to build to proxy Github's list of proposal to Firefly and Web DAO. This should be a very simple proxy so it can be easily audited for any security issue.
+
+Proxy will keep a clone of Github repository within database that clients can use to get the latest. Following tool can be used to achieve that: https://isomorphic-git.org.
+
+One approach could be to utilise Google's Cloud Firestore database accessed by Firefly/Web DAO. It also supports websocket for very efficient communication. The Cloud Firestore database instance can also be used by Web DAO to manage proposals and other added functionality. 
+
+Firebase Functions can be utilized to execute actions based on changes within the database as well as on monitoring changes within the Github repository. 
+
+### Firebase Auth
+When authentication to Github is required within Web DAO Firebase AUTH can be utilized for that. 
+
+> Note, Firebase product is not necessary and it's an example of tool that could be utilized to deliver globally scalable solution that supports above requirements.
+
+## Historical Access
+It's very important that all voting data are persisted for long period of time to provide constant transparency into the decision made since the day one. Ideally, group of trusted perma-nodes should eventually be established compare to just storing the voting result in a repository as this data could be manipulated. User can see data from various permanodes within Web DAO and whether they're consistent. DAO could potentially fund infrastructure cost for these permanodes. 
+
+**Voting permanode key requirements:**
+- store complete transaction history for every vote on each proposal
+- provides list of all proposals
+- ability to retrieve voting results / transactions per referendum
+
+> Firefly does not connect to any permanode at the moment and we ideally should not change that. Firefly will only know information available due User's action (stored in Stronghold) or available within Hornet Node (i.e. proposals voting overview)
+
+
+### Wallet.rs does not require any enhancements/changes
+As per our understanding wallet.rs does not require any changes as it already supports "no value" transactions.
+
+### External links in Firefly
+Any external links in Firefly must be whitelisted and clearly defined. Ideally, only connection to "middleware" and Web DAO should be allowed.
 
 # Known Limitations / Assumptions
 ## Firefly deep links
 Should we supported soon and in time for WEB DAO.
 
+## Firefly mobile
+Firefly mobile wallet will not be supported as it's still in conceptual stage and it's long away from delivery. 
+
 ## IOTA DID will not be implemented within the phase 1
-It was proposed that IOTA DID could be use to authenticate users within the Web DAO and used for proposal management. This is still evolving technology and it's preferred to wait to reduce possible dependency.
+It was proposed that IOTA DID could be used to authenticate users within the Web DAO and used for proposal management. This is still evolving technology (limited tooling) and it's preferred to wait to reduce possible dependency.
 
 ## Privacy during the voting
-Firefly voting plugin will behave same way as Firefly and it'll group all addressees within the wallet. This means if user has multiple address with a balance within one Firefly wallet those would be grouped together. Firefly applies same approach when funds are send from the wallet.
+Firefly voting plugin will behave same way as Firefly and it'll group all addressees within the wallet. This means if user has multiple addresses with balance within one Firefly wallet those would be grouped together. Firefly applies same approach when funds are send from an existing wallet.
 
 It's understand that some users might prefer to avoid that for privacy reasons. Those users will have to use different tool and not Firefly.
 
 **Suggested solutions**
-1. We discussed an approach where Firefly could potentially spread the vote over a time although this would have be an extensive time that could cause a security risk. It would also potentially have low adoption as users will not be comfortable to keep their wallet open.
+1. We discussed an approach where Firefly could potentially spread the vote over a time although this would be an extensive time period that could cause a security risk. It would also potentially have low adoption as users will not be comfortable to keep their wallet open.
 2. Node could potentially spread transactions. Although, this would require user trusting the node and create yet another problem.
 3. Delegation of the vote. User might be able to create a new wallet and delegate their other wallets to this new address over longer period. Use this new wallet to vote. This approach can create another problem as we might have to depend on perma-nodes and figure the validity of their data.
+
+> For those users that are concern about privacy it might also be recommended to use VPN in case Hornet node logs access/usage.
 
 ## Firefly changes
 Firefly does not yet support plug-in system and it is at research stage. Therefore voting plugin will be developed as new core function within the Firefly wallet and IF will drive UX/UI design and overall architecture.
 
 ## Transition to ISCP
-Web DAO / Firefly should potentially allow relatively simple to ISCP to limit impact to the user as well as reduce the time for delivery. This should be further expanded. 
+Web DAO / Firefly should potentially allow relatively simple transition to ISCP and limit impact to the user as well as reduce the time for delivery.
 
-Ideally there is no impact to user and we would just change the "engine" but keep the same dashboard and steering wheel. 
+> Ideally, there is no impact to user and we would just change the "engine" but keep the same dashboard and steering wheel. 
 
 # Contributors
 * @adamkundrat
