@@ -1,0 +1,13 @@
+# CODEOWNERS are used to define approvers for various things within this repository.
+# Everything by default goes to repo
+*   @iota-community/treasury
+
+# Proposals are assigned for approval to defined community member
+# This list is to be confirmed. Below is for now just example.
+proposals/  @Phyloiota @adamkundrat @GmanRedmond
+# If anyone changes .github folder it must be approved by everyone
+.gihub/ @iota-community/treasury @Phyloiota @adamkundrat  @GmanRedmond
+
+# Define list below who can administer github pages
+gh-pages/ @iota-community/treasury
+
