@@ -225,7 +225,7 @@ It's very important that all voting data are persisted for long period of time t
 - provides list of all proposals
 - ability to retrieve voting results / transactions per referendum
 
-> Firefly does not connect to any permanode at the moment and we ideally should not change that. Firefly will only know information available due User's action (stored in Stronghold) or available within Hornet Node (i.e. proposals voting overview)
+> Firefly does not connect to any permanode at the moment and we ideally should not change that. Firefly will only know information due user's action (stored in Stronghold) or available within Hornet Node (i.e. proposals voting overview)
 
 
 ### Wallet.rs does not require any enhancements/changes
@@ -254,7 +254,7 @@ It's understand that some users might prefer to avoid that for privacy reasons. 
 2. Node could potentially spread transactions. Although, this would require user trusting the node and create yet another problem.
 3. Delegation of the vote. User might be able to create a new wallet and delegate their other wallets to this new address over longer period. Use this new wallet to vote. This approach can create another problem as we might have to depend on perma-nodes and figure the validity of their data.
 
-> For those users that are concern about privacy it might also be recommended to use VPN in case Hornet node logs access/usage.
+> For those users that are concerned about privacy it might also be recommended to use VPN in case Hornet node logs usage.
 
 ## Firefly changes
 Firefly does not yet support plug-in system and it is at research stage. Therefore voting plugin will be developed as new core function within the Firefly wallet and IF will drive UX/UI design and overall architecture.
