@@ -118,9 +118,9 @@ Main purpose is the ability for the user to cast their vote, change their vote a
 * The way hornet integrates new proposals needs to be defined by the hornet team, but it might also be a sufficient way to use the provided API access.
   
 ### Proposal Termination
-* During the building phase of the system we can move proposals to a "finished" folder if the vote has occured. Also proposals that dont get approved should be moved in an "rejected" folder and so still be publicly available and visible.
-
-
+* New file in proposals/<hash_id_of_content>.json will be created indicating termination for another proposal that's already in master branch proposal/ folder.
+* Pull request is submitted, approved and merged
+* Node operators / Firefly / Middleware will detect this change and act accordingly.
 
 ## Firefly
 ### View Proposals
@@ -197,14 +197,14 @@ Main purpose is the ability for the user to cast their vote, change their vote a
 # High-level Technical Requirement
 In this section we highlight some of the key technical assumptions. This can be further expanded or changed down the track as required during the implementation. It's explained to help the builder understand mechanics and potentially direct them to a possible approach.
 
-In summary, Firefly code changes should be minimal and should be primarily focused on the ability to "execute the vote". Any other functionality should be done within Treasury Website. This will reduce security risks and allows us to quickly build up more features. 
+In summary, Firefly code changes should be minimal and should be primarily focused on the ability to "execute the vote". Any other functionality should be done within Treasury Website. This will reduce security risks and allows us to quickly build up more features.
 
 ## Middleware for proposal management
 > Ideally, middleware is only an intern solution before ISCP is implemented and ready to be used.
 
-Middleware management tool will have to build to proxy Github's list of proposals to Firefly and Treasury Website. This should be a very simple proxy so it can be easily audited for any security issue.
+Middleware management tool will have to build to proxy Github's list of proposal to Firefly and Treasury Website. This should be a very simple proxy so it can be easily audited for any security issues.
 
-The proxy will keep a clone of the Github repository within a database that clients can use to get the latest. The following tool can be used to achieve that: https://isomorphic-git.org.
+Proxy will keep a clone of the Github repository within database that clients can use to get the latest. The following tool can be used to sync git: https://isomorphic-git.org.
 
 One approach could be to utilize Google's Cloud Firestore database accessed by Firefly/Treasury Web. It also supports WebSocket for very efficient communication. The Cloud Firestore database instance can also be used by Treasury Web to manage proposals and other added functionality. 
 
@@ -243,9 +243,9 @@ Firefly mobile wallet will not be supported as it's still in the conceptual stag
 It was proposed that IOTA DID could be used to authenticate users within the Web DAO and used for proposal management. This is still evolving technology (limited tooling) and it's preferred to wait to reduce possible dependency.
 
 ## Privacy during the voting
-Firefly voting plugin will behave same way as Firefly and it'll group all addressees within the wallet. This means if a user has multiple addresses with balance within one Firefly wallet those would be grouped together. Firefly applies the same approach when funds are sent from an existing wallet.
+Firefly voting plugin will behave same way as Firefly and it'll group all addressees within the wallet. This means if a user has multiple addresses with balance within one Firefly wallet those would be grouped together. Firefly applies the same approach when funds are sent from an existing wallet. It generates remaining output on a new address.
 
-We understand that some users might prefer to avoid that for privacy reasons. Those users will have to use different tools and not Firefly.
+We understand that some users might prefer to avoid that for privacy reasons. Those users will have to use different tools instead of Firefly.
 
 **Suggested solutions**
 1. We discussed an approach where Firefly could potentially spread the vote over time although this would be an extensive time period that could cause a security risk. It would also potentially have low adoption as users will not be comfortable keeping their wallet open.
