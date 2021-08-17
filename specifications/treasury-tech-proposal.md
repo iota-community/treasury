@@ -125,7 +125,7 @@ Main purpose is the ability for the user to cast their vote, change their vote a
 ## Firefly
 ### View Proposals
 * User navigates into the voting tab
-* User can view existing proposals which Firefly has uploaded via the API call from the Github release.
+* User can view existing proposals which Firefly has uploaded via the API call or the proxy discussed below from the Github master branch.
     * Note, Firefly gets proposals from the master branch proposals/ folder and check if it exists on the node. There might be a scenario where it's not uploaded to nodes yet. We will have to define how to handle this situation. So Firefly would need to communicate with its connected node if the node is aware of the proposal
       * Firefly must periodically check for new proposals and at Application start
 * By default, users only see upcoming/in progress proposals
