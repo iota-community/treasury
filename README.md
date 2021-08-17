@@ -6,11 +6,10 @@ TBD
 * Hortnet plugin - https://github.com/WernerderChamp/protocol-rfcs/blob/master/text/0000-chrysalis-referendum/0000-chrysalis-referendum.md
 
 # Roadmap
-
-* Github pages for DAO
-* Website DAO
-* Firefly Plugin
+TBD
 
 # Proposals Approvers
+TBD
 
 # Feedback
+Pull Requests. To be expanded. 
