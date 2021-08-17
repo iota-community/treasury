@@ -197,16 +197,16 @@ Main purpose is the ability for the user to cast their vote, change their vote a
 ![](https://i.imgur.com/Fu9Npwg.png)
 
 # High-level Technical Requirement
-In this section we highlight some of the key technical assumptions. This can be further expanded or changed down the track as required during the implementation. It's explained to help the builder understand mechanics and potentially direct them on possible approach.
+In this section we highlight some of the key technical assumptions. This can be further expanded or changed as required during the implementation. It's explained to help the builder understand mechanics and potentially direct them on possible approaches.
 
-In summary, Firefly code changes should be minimal and should be primarily focused on ability "execute the vote". Any other functionality should be done within Web DAO. This will reduce security risks and allows us to quickly build up more features. 
+In summary, Firefly code changes should be minimal and should be primarily focused on ability to "execute the vote". Any other functionality should be done within Web DAO. This will reduce security risks and allows us to quickly build up more features without innvolving IF.
 
 ## Middleware for proposal management
 > Ideally, middleware is only an intern solution before ISCP are implemented and ready to be used.
 
-Middleware management tool will have to build to proxy Github's list of proposal to Firefly and Web DAO. This should be a very simple proxy so it can be easily audited for any security issue.
+Middleware management tool will have to build to proxy Github's list of proposal to Firefly and Web DAO. This should be a very simple proxy so it can be easily audited for any security issues.
 
-Proxy will keep a clone of Github repository within database that clients can use to get the latest. Following tool can be used to achieve that: https://isomorphic-git.org.
+Proxy will keep a clone of Github repository within database that clients can use to get the latest. Following tool can be used to sync git: https://isomorphic-git.org.
 
 One approach could be to utilise Google's Cloud Firestore database accessed by Firefly/Web DAO. It also supports websocket for very efficient communication. The Cloud Firestore database instance can also be used by Web DAO to manage proposals and other added functionality. 
 
@@ -245,14 +245,14 @@ Firefly mobile wallet will not be supported as it's still in conceptual stage an
 It was proposed that IOTA DID could be used to authenticate users within the Web DAO and used for proposal management. This is still evolving technology (limited tooling) and it's preferred to wait to reduce possible dependency.
 
 ## Privacy during the voting
-Firefly voting plugin will behave same way as Firefly and it'll group all addressees within the wallet. This means if user has multiple addresses with balance within one Firefly wallet those would be grouped together. Firefly applies same approach when funds are send from an existing wallet.
+Firefly voting plugin will behave same way as Firefly and it'll group all addressees within the wallet. This means if user has multiple addresses with balance within one Firefly wallet those would be grouped together during voting. Firefly applies same approach when funds are send from an existing wallet. It generates remaining output on a new address.
 
-It's understand that some users might prefer to avoid that for privacy reasons. Those users will have to use different tool and not Firefly.
+It's understood that some users might prefer to avoid that for privacy reasons. Those users will have to use different tool instead of Firefly.
 
 **Suggested solutions**
 1. We discussed an approach where Firefly could potentially spread the vote over a time although this would be an extensive time period that could cause a security risk. It would also potentially have low adoption as users will not be comfortable to keep their wallet open.
 2. Node could potentially spread transactions. Although, this would require user trusting the node and create yet another problem.
-3. Delegation of the vote. User might be able to create a new wallet and delegate their other wallets to this new address over longer period. Use this new wallet to vote. This approach can create another problem as we might have to depend on perma-nodes and figure the validity of their data.
+3. Delegation of the vote. User might be able to create a new wallet and delegate their other wallets to this new address over longer period and use this new wallet to vote. This approach can create another problem as we might have to depend on perma-nodes and figure out how to validate their data.
 
 > For those users that are concerned about privacy it might also be recommended to use VPN in case Hornet node logs usage.
 
