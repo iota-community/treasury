@@ -118,7 +118,7 @@ Main purpose is the ability for the user to cast their vote, change their vote a
 * The way hornet integrates new proposals needs to be defined by the hornet team, but it might also be a sufficient way to use the provided API access.
   
 ### Proposal Termination
-* During the building phase of the system we should keep it to the CODEOWNERS to remove proposals that are not reaching approval from all required and elected approvers
+* During the building phase of the system we can move proposals to a "finished" folder if the vote has occured. Also proposals that dont get approved should be moved in an "rejected" folder and so still be publicly available and visible.
 
 
 
