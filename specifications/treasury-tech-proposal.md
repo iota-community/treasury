@@ -271,8 +271,12 @@ Web DAO / Firefly should potentially allow a relatively simple transition to ISC
 Please submit your suggestions via pull request within [this](https://github.com/iota-community/Community-Governance) repository.
 
 ## TODO
-- [ ] DRAFT Treasury Web mock-ups
-- [ ] Finalize Firefly mock-ups (IF team)
+- [ ] 1. Finalize DAO branding (website, colours, logos, etc.)
+- [ ] 2. Collect feedback from community on this document.
+- [ ] 3. DRAFT Treasury Web mock-ups
+    - [ ] blocked by 1 & 2
+- [ ] 4. Finalize Firefly mock-ups (IF team)
+    - [ ] blocked by 2
 
 # Contributors
 * @adamkundrat
