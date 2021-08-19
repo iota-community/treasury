@@ -22,7 +22,7 @@ Flexibility is important at this stage. Therefore the initial design provides th
 - Firefly plug-in to display referendums to the user and enables the user to cast votes
 - Hornet Node plug-in that counts votes in the IOTA Tangle and produces verifiable results of the vote. Developing this plugin is not in the scope of this specification.
 
-The tools (Firefly and Hornet plugin) should work with the referendum structure proposed in this RFC: https://github.com/WernerderChamp/protocol-rfcs/blob/master/text/0000-chrysalis-referendum/0000-chrysalis-referendum.md (not yet finaly defined)
+The tools (Firefly and Hornet plugin) should work with the referendum structure proposed in this RFC: https://github.com/WernerderChamp/protocol-rfcs/blob/master/text/0000-chrysalis-referendum/0000-chrysalis-referendum.md (not yet finally defined)
 
 
 The requirements detailed below were established based on numerous discussions and meetings that took place on IOTA's Discord #governance and #voting-tech channels. 
@@ -89,10 +89,10 @@ Additionally, it could be leveraged to provide an introduction to the voting pro
 
 > Potentially, the Website can integrate with Github and allow proposal management within the application (i.e. simplify it for users without Github knowledge). This can help transition to ISCP as users do not need to get used to the new system, and it'll be just underlying tech that changes.
 
-
 ### Firefly plugin
-The extension for Firefly will support the ability to view proposals that are "available for a vote", "in progress proposals", and "finished proposals" (the solution for storing finished proposals needs to be discussed further). 
-Main purpose is the ability for the user to cast their vote, change their vote and see the votes of other users (generalized).
+The extension for Firefly will support the ability to view proposals that are "available for a vote" and "in progress proposals".  Main purpose is the ability for the user to cast their vote, change their vote and see the vote they did in the past (stored in transaction history within Stronghold).
+
+> Note, voting history will not be available if the users resets their wallet. They'll have to use treasury website to see their historical vote. Firefly transaction history is based on transactions that happen within installed Firefly instance and history is not retrieved from perma-node.
 
 # Detailed Usage
 
@@ -125,12 +125,11 @@ Main purpose is the ability for the user to cast their vote, change their vote a
 ## Firefly
 ### View Proposals
 * User navigates into the voting tab
-* User can view existing proposals which Firefly has uploaded via the API call or the proxy discussed below from the Github master branch.
-    * Note, Firefly gets proposals from the master branch proposals/ folder and check if it exists on the node. There might be a scenario where it's not uploaded to nodes yet. We will have to define how to handle this situation. So Firefly would need to communicate with its connected node if the node is aware of the proposal
-      * Firefly must periodically check for new proposals and at Application start
-* By default, users only see upcoming/in progress proposals
-* They can filter and see ended ones (history) 
-     * Note: This needs to be discussed and defined from where this data will be sourced, or if Firefly stores it internally / locally
+* User can view commencing/holding proposals which Firefly has retrieved from IF's Amazon S3 bucket.
+    * A sync tool (in control of IF) gets proposals from the master branch proposals/ folder and syncs them into S3 bucket. 
+    * Retrieved proposals within Firefly are checked and validated against the node. There might be a scenario where it's not uploaded to nodes yet. We will have to define how to handle this situation. Firefly would need to communicate with its connected node if the node is aware of the proposal
+      * Firefly must periodically check for new proposals and at Application start.
+* By default, users only see commencing/holding proposals
 * User should be able to easily identify proposals still pending their vote 
 * User can easily open proposal on the Treasury Website to access fully history (i.e. pre-approval) via a provided link (button etc)
 ### Submit Vote
@@ -139,7 +138,8 @@ Main purpose is the ability for the user to cast their vote, change their vote a
 * User must be informed about voting power (in IOTA units) and "weight" of their vote as it might be different: 
     * If proposals are already in "Holding" state and therefore the user cannot reach 100% voting power anymore
     * If they change their vote during "Holding" stage of the proposals and therefore voted for 2 different options with the specific voting power that is related to the holding time of each option
-* User can select the wallet they want to vote with (amount of funds to allocate as opinion)
+* User can select the wallet they want to vote with
+    * if they want to specify different amount, they have to split funds into another wallet prior
 * User can open their vote on the Treasury Web and from there they have an ability to share their vote options online (discord/Twitter/etc.). This could potentially include a link to their actual "vote" other users can view within Treasury Website.
 * To decouple the Voting from "spending funds" we envision to not display any value metrics in the voting Tab. We would always refer to IOTA votes and not display USD value or call it tokens.
 ### Change Vote
@@ -149,8 +149,9 @@ Main purpose is the ability for the user to cast their vote, change their vote a
 * They get the direct information of the impact of the change (i.e "due to the change you have currently gained XXX voting power for option X and now will continue to build up voting power on option Y")
 * They share their vote easily online again
 ### View Vote Status
-* User is able to view status and progress of each proposal and their own vote
-* Ability to view overall results / ongoing counts
+* User is able to view proposals in commencing/holding status and their own vote
+    * Ability to view overall results - we want to keep this simple
+    * They can go to Treasury Web to see more 
 
 ## Treasury Web
 ### Home page
@@ -188,8 +189,7 @@ Main purpose is the ability for the user to cast their vote, change their vote a
 * Display Members that approve proposals within GitHub (members of iota-community/treasury ?)
 
 ### Firefly Voting Logic
-
-
+tbd
 
 ### IDEAS on UX/UI 
 * Proposals on Treasury Website could be similar to Github Discussions: https://github.com/iota-community/Community-Governance/discussions and provide a forum for the community to discuss the topic
@@ -199,10 +199,13 @@ In this section we highlight some of the key technical assumptions. This can be 
 
 In summary, Firefly code changes should be minimal and should be primarily focused on the ability to "execute the vote". Any other functionality should be done within Treasury Website. This will reduce security risks and allows us to quickly build up more features.
 
+## Firefly and Amazon S3 Bucket
+Firefly currently uses Amazon S3 cloud storage to check if there are new application updates. Tool must be build to synchronize "proposal/" folder from the master branch into the IF's Amazon S3 bucket. Firefly can access this S3 bucket to get existing and new proposals.
+
 ## Middleware for proposal management
 > Ideally, middleware is only an intern solution before ISCP is implemented and ready to be used.
 
-Middleware management tool will have to build to proxy Github's list of proposal to Firefly and Treasury Website. This should be a very simple proxy so it can be easily audited for any security issues.
+Middleware management tool will have to build to proxy Github's functions for Treasury Website. This should be a very simple proxy so it can be easily audited for any security issues.
 
 Proxy will keep a clone of the Github repository within database that clients can use to get the latest. The following tool can be used to sync git: https://isomorphic-git.org.
 
@@ -268,12 +271,8 @@ Web DAO / Firefly should potentially allow a relatively simple transition to ISC
 Please submit your suggestions via pull request within [this](https://github.com/iota-community/Community-Governance) repository.
 
 ## TODO
-- [ ] Initiate process to agree to a domain name
-- [ ] For a potential DAO with ISCP, this will need to be extended into a full forum style discussion board where the community can communicate with the proposal submitters and discuss all topics related to the proposals.
-- [ ] Finalize Firefly mock-ups
 - [ ] DRAFT Treasury Web mock-ups
-- [ ] Hornet Node plugin - this needs to be still worked out more -  data sizes are too big; IMHO 1 MB proposal size is not helpful. This is more likely for the other RFC.
-
+- [ ] Finalize Firefly mock-ups (IF team)
 
 # Contributors
 * @adamkundrat
