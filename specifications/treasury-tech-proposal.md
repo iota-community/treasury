@@ -18,8 +18,8 @@ A more detailed design will follow once requirements, dependencies and scope are
 Flexibility is important at this stage. Therefore the initial design provides the opportunity to evaluate various technical approaches that could be prototyped and decided upon in the future. The intent is to encourage a more agile process as we move forward.
 
 **Voting tech consists of three parts:**
-- Treasury Website to inform the community
-- Firefly plug-in to display referendums to the user and enables the user to cast votes
+- Treasury Website to inform the community and display upcomming, ongoing and past proposals
+- Firefly plug-in to enable the user to cast votes and see his own votes (ongoing, probably past)
 - Hornet Node plug-in that counts votes in the IOTA Tangle and produces verifiable results of the vote. Developing this plugin is not in the scope of this specification.
 
 The tools (Firefly and Hornet plugin) should work with the referendum structure proposed in this RFC: https://github.com/WernerderChamp/protocol-rfcs/blob/master/text/0000-chrysalis-referendum/0000-chrysalis-referendum.md (not yet finally defined)
