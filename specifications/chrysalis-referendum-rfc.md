@@ -32,9 +32,9 @@ Any referendum will start here. The creator specifies the questions and all answ
 
 Referendums need to be published as a Draft Pull request in the Treasury Github Repository. From this time on, the community can comment on the pull request, start discussions or issues, and request changes as commits to the PR. As soon as all those requests have been addressed, the Pull Request needs to be checked and the correct format of the Data verified by the Reviewers.
 
-Those reviewers need to be elected, announced, and agreed on by the community. The Reviewers need to agree on the correct form of the Referendum. hen all reviews are submitted and agreed on, an ID is created by hashing the entire referendum data. Therefore the same combination always results in the same ID. Now the Referendum can be merged into the Master branch.
+Those reviewers need to be elected, announced, or agreed on by the community. The Reviewers need to agree on the correct form of the Referendum. hen all reviews are submitted and agreed on, an ID is created by hashing the entire referendum data. Therefore the same combination always results in the same ID. Now the Referendum can be merged into the Master branch.
 
-As soon as a new Referendum is merged into the Master branch, the Firefly Wallet can upload it using an API Call to the Treasury Repository Master branch that searches for new Referendums (new unique ID). This call is initiated upon starting the Firefly app and regularly during the app is open.
+As soon as a new Referendum is merged into the Master branch, the Firefly Wallet can upload it using the existing call to IF's amazon S3 bucket where it also normally checks for new releases of the hornet software. In this way the system can leverage on existing infrastructure from IF.
 
 Referendums are neither automatically added to all nodes, nor are they broadcast on the network. Instead, the referendum must be added to multiple nodes manually. Because submitting the same referendum to multiple nodes always results in the same ID, it is possible to compare the data of multiple nodes. This also provides security, as users can verify they are voting for the correct referendum (e.g. because the ID is published on Github).
 It needs to be discussed if the Hornet plugin can use the Github API call instead of the manual upload.
