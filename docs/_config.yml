@@ -1,1 +1,3 @@
 remote_theme: "iota-community/treasury-website-layout"
+plugins:
+  - jekyll-postcss
