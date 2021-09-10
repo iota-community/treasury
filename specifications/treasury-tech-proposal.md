@@ -1,5 +1,3 @@
-**NOTE: THIS DOCUMENT IS VERY MUCH A WORK IN PROGRESS.**
-
 # Overview
 
 This specification summarizes requirements to develop the technology to be used in the initial vote to burn the tokens or form the IOTA Community Treasury.
