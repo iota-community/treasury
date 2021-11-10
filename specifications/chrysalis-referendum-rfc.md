@@ -89,39 +89,35 @@ The referendum, the question, and each answer have an information field, which m
         <td>Referendum Name Length</td>
         <td>uint8</td>
         <td>
-        The length of the referendum name in bytes
+            The length of the referendum name in bytes
         </td>
     </tr>
-      <tr>
+    <tr>
         <td>Referendum Name</td>
         <td>String</td>
         <td>
-        The referendum question in UTF-8 format
+            The referendum question in UTF-8 format
         </td>
     </tr>
-      <tr>
+    <tr>
         <td>Begin Milestone</td>
         <td>uint32</td>
         <td>
-        The milestone where the referendum begins
+            The milestone where the referendum begins
         </td>
     </tr>
-    </tr>
-      </tr>
-      <tr>
+    <tr>
         <td>Holding Start Milestone</td>
         <td>uint32</td>
         <td>
-        The milestone where the referendum enters holding phase
+            The milestone where the referendum enters holding phase
         </td>
     </tr>
-    </tr>
-      </tr>
-      <tr>
+    <tr>
         <td>End Milestone</td>
         <td>uint32</td>
         <td>
-        The milestone where the referendum ends
+            The milestone where the referendum ends
         </td>
     </tr>
     <tr>
@@ -133,128 +129,130 @@ The referendum, the question, and each answer have an information field, which m
         <td valign="top">Voting question <code>oneOf</code></td>
         <td colspan="2">
             <details open="true">
-                <summary>Voting question</summary>
-                <blockquote>
+            <summary>Voting question</summary>
+            <blockquote>
                 A question that can be voted on
-                </blockquote>
-                <table>
-                    <tr>
-                        <td><b>Name</b></td>
-                        <td><b>Type</b></td>
-                        <td><b>Description</b></td>
-                    </tr>
-                    <tr>
-                        <td>Question Idx</td>
-                        <td>uint8</td>
-                        <td>
+            </blockquote>
+            <table>
+                <tr>
+                    <td><b>Name</b></td>
+                    <td><b>Type</b></td>
+                    <td><b>Description</b></td>
+                </tr>
+                <tr>
+                    <td>Question Idx</td>
+                    <td>uint8</td>
+                    <td>
                         The index of the question. Counted from 1 to 255.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Question Text Lengh</td>
-                        <td>uint8</td>
-                        <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Question Text Lengh</td>
+                    <td>uint8</td>
+                    <td>
                         The length of the question in bytes
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Question name</td>
-                        <td>String</td>
-                        <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Question name</td>
+                    <td>String</td>
+                    <td>
                         The text of the question in UTF-8 format
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Answer Count</td>
-                        <td>uint8</td>
-                        <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Answer Count</td>
+                    <td>uint8</td>
+                    <td>
                         The amount of answers following
-                        </td>
-                    </tr>
-                      <td valign="top">Voting Answer <code>oneOf</code></td>
-                      <td colspan="2">
-                       <details open="true">
-                          <summary>Voting answer</summary>
-                           <blockquote>
-                          A votable answer for the question
-                           </blockquote>
-                           <table>
-                               <tr>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top">Voting Answer <code>oneOf</code></td>
+                    <td colspan="2">
+                        <details open="true">
+                        <summary>Voting answer</summary>
+                        <blockquote>
+                            A votable answer for the question
+                        </blockquote>
+                        <table>
+                            <tr>
                                 <td><b>Name</b></td>
                                 <td><b>Type</b></td>
                                 <td><b>Description</b></td>
-                               </tr>
-                               <tr>
+                            </tr>
+                            <tr>
                                 <td>Answer ID</td>
                                 <td>uint8</td>
                                 <td>
-                                The ID of the answer. Counted from 1 to 255.
-																													 		</td>
-																															</tr>
-																															<tr>
-																																<td>Answer Text Length</td>
-																																<td>uint8</td>
-																																<td>
-																																The length of the answer text in bytes
-																																</td>
-																															</tr>
-																															<tr>
-																																<td>Answer Text</td>
-																																<td>String</td>
-																																<td>
-																																The text of the answer in UTF-8 format
-																																</td>
-																															</tr>
-																															<tr>
-																																<td>Answer Additional Information Length</td>
-																																<td>uint16</td>
-																																<td>
-																																The length of the answer additional information text in bytes
-																																</td>
-																															</tr>
-																															<tr>
-																																<td>Answer Additional Information</td>
-																																<td>String</td>
-																																<td>
-																																Additional information about the Answer UTF-8 format
-																																</td>
-																															</tr>
-																														</table>
-																												</details>
-																										</td>
-                        <tr>
-                        <td>Question Additional Information Length</td>
-                        <td>uint16</td>
-                        <td>
+                                    The ID of the answer. Counted from 1 to 255.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Answer Text Length</td>
+                                <td>uint8</td>
+                                <td>
+                                    The length of the answer text in bytes
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Answer Text</td>
+                                <td>String</td>
+                                <td>
+                                    The text of the answer in UTF-8 format
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Answer Additional Information Length</td>
+                                <td>uint16</td>
+                                <td>
+                                    The length of the answer additional information text in bytes
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Answer Additional Information</td>
+                                <td>String</td>
+                                <td>
+                                    Additional information about the Answer UTF-8 format
+                                </td>
+                            </tr>
+                        </table>
+                        </details>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Question Additional Information Length</td>
+                    <td>uint16</td>
+                    <td>
                         The length of the question additional information text in bytes
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Question additional Information</td>
-                        <td>String</td>
-                        <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Question additional Information</td>
+                    <td>String</td>
+                    <td>
                         Additional information about the question in UTF-8 format
-                        </td>
-                    </tr>
-                  </table>
-          </details>
-  </td>
-    <tr>
-        <td>Referendum Additional Information Length</td>
-        <td>uint16</td>
-        <td>
-        The length of additional information in bytes. Set to 0 if empty
+                    </td>
+                </tr>
+            </table>
+            </details>
         </td>
-    </tr>
-      <tr>
-        <td>Referendum Additional Information</td>
-        <td>String</td>
-        <td>
-        Additional information in UTF-8 format. Field does not exist if the length was set to 0
-        </td>
+        <tr>
+            <td>Referendum Additional Information Length</td>
+            <td>uint16</td>
+            <td>
+                The length of additional information in bytes. Set to 0 if empty
+            </td>
+        </tr>
+        <tr>
+            <td>Referendum Additional Information</td>
+            <td>String</td>
+            <td>
+                Additional information in UTF-8 format. Field does not exist if the length was set to 0
+            </td>
+        </tr>
     </tr>
 </table>
-
 <i>The BLAKE2b-256 hash of this object is the referendum ID, which is used as the UUID of the referendum</i>
 
 ### Syntactical validation
