@@ -347,9 +347,9 @@ Participation data will be sent via the indexation payload of a value transactio
 ### Criteria for a valid participation transaction
 
 * Must be a valid value transaction adhering to protocol rules (e.g. dust protection)
-* Inputs must all come from the same address. Multiple inputs are allowed
 * Has a singular output going to the same address as all input addresses.
   * Output Type 0 (SigLockedSingleOutput) and Type 1 (SigLockedDustAllowanceOutput) are both valid for this
+* At least one input must come from the same address as the output. Multiple inputs are allowed. This is used to validate ownership of the address.
 * The index must be ``"PARTICIPATE"``
 * The data must be parseable
 
