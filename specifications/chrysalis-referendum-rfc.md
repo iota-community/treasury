@@ -28,13 +28,13 @@ An event has 4 different states
 
 ### Upcoming
 
-Any event will start here. The creator specifies the beginning, start of the holding phase, and end of the event. Additionally either a ballot with questions or the parameters to calculate staking rewards are include.
+Any event will start here. The creator specifies the starting times for each of the event states. Additionally either a ballot with questions or the parameters to calculate staking rewards are include.
 
 Events are neither automatically added to all nodes, nor are they broadcast on the network. Instead, the event must be added to multiple nodes manually. Because submitting the same event to multiple nodes always results in the same ID, it is possible to compare the data of multiple nodes. This also provides security, as users can verify they are participating in the correct event.
 
 ### Commencing
 
-Once the commence milestone defined in the referendum has been reached, the referendum enters the commencing phase. During this phase, users can participate in the event, but this participation will only be tracked by the nodes. During this phase no votes will be counted and no staking rewards will be distributed.
+Once the commence milestone defined in the referendum has been reached, the referendum enters the commencing phase. During this phase, users can participate in the event, but only the participation itself will be tracked by the nodes (i.e. votes will not be counted nor will staking rewards be distributed during this phase).
 
 Whatever time is set as the beginning, there will always be a place in the world where it will be very inconvenient (e.g., the middle of the night). This phase grants fairness to every timezone, as it does not matter when you submit your participation in this phase. Also, it can be used to draw public attention and spread the word.
 
@@ -346,11 +346,11 @@ Participation data will be sent via the indexation payload of a value transactio
 
 ### Criteria for a valid participation transaction
 
-* Must be a value transaction
+* Must be a valid value transaction adhering to protocol rules (e.g. dust protection)
 * Inputs must all come from the same address. Multiple inputs are allowed
 * Has a singular output going to the same address as all input addresses.
   * Output Type 0 (SigLockedSingleOutput) and Type 1 (SigLockedDustAllowanceOutput) are both valid for this
-* The Index must be ``"PARTICIPATE"``
+* The index must be ``"PARTICIPATE"``
 * The data must be parseable
 
 ### Structure of the Participation
@@ -362,17 +362,17 @@ Participation data will be sent via the indexation payload of a value transactio
         <th>Description</th>
     </tr>
     <tr>
-        <td>Participation count</td>
+        <td>Participations count</td>
         <td>uint8</td>
         <td>
         The amount of participations following. Must be at least one
         </td>
     </tr>
     <tr>
-        <td valign="top">Referendum vote<code>oneOf</code></td>
+        <td valign="top">Participations<code>anyOf</code></td>
         <td colspan="2">
             <details open="true">
-                <summary>Participations</summary>
+                <summary>Participation</summary>
                 <blockquote>
                 A participation for an event
                 </blockquote>
