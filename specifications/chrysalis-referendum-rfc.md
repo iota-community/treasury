@@ -28,9 +28,9 @@ An event has 4 different states
 
 ### Upcoming
 
-Any event will start here. The creator specifies the starting times for each of the event states. Additionally either a ballot with questions or the parameters to calculate staking rewards are include.
+Any event will start here. The creator specifies the starting times for each of the event states. Additionally either a ballot with questions or the parameters to calculate staking rewards are included.
 
-Events are neither automatically added to all nodes, nor are they broadcast on the network. Instead, the event must be added to multiple nodes manually. Because submitting the same event to multiple nodes always results in the same ID, it is possible to compare the data of multiple nodes. This also provides security, as users can verify they are participating in the correct event.
+Events are neither automatically added to all nodes, nor are they broadcasted on the network. Instead, the event must be added to multiple nodes manually. Because submitting the same event to multiple nodes always results in the same ID, it is possible to compare the data of multiple nodes. This also provides security, as users can verify they are participating in the correct event.
 
 ### Commencing
 
@@ -56,6 +56,10 @@ Example: Assume Alice has 2i and does not vote at all. Now she sends her tokens 
 *     Turnout: 50000/70000=71.4% 
 
 To avoid overflowing uint64, the vote power for each participation is calculated as the amount divided by 1000. This means that every 1Ki represents 1 vote.
+
+#### Staking events
+
+Every time a milestone comes in, the node will increase the rewarded amount per address according to the staked amount and the configured calculation, i.e. by multiplying the staked amount using the numerator and denominator.
 
 ### Ended
 
@@ -206,14 +210,14 @@ Users can submit an event to any nodes that have the endpoint open.
                                             <td>Answer Additional Information Length</td>
                                             <td>uint16</td>
                                             <td>
-                                                The length of the answer additional information text in bytes
+                                                The length of the answer additional information text in bytes. Set to 0 if empty. Max 500 bytes are allowed.
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Answer Additional Information</td>
                                             <td>String</td>
                                             <td>
-                                                Additional information about the Answer UTF-8 format
+                                                Additional information about the Answer UTF-8 format. Field does not exist if the length was set to 0.
                                             </td>
                                         </tr>
                                     </table>
@@ -231,7 +235,7 @@ Users can submit an event to any nodes that have the endpoint open.
                                 <td>Question additional Information</td>
                                 <td>String</td>
                                 <td>
-                                    Additional information about the question in UTF-8 format. Field does not exist if the length was set to 0
+                                    Additional information about the question in UTF-8 format. Field does not exist if the length was set to 0.
                                 </td>
                             </tr>
                         </table>
@@ -274,7 +278,7 @@ Users can submit an event to any nodes that have the endpoint open.
                     <td>Symbol Lenght</td>
                     <td>uint8</td>
                     <td>
-                        The length of the token symbol in bytes. Must be between 3 and 5.
+                        The length of the token symbol in bytes. Must be between 3 and 10.
                     </td>
                 </tr>
                 <tr>
@@ -320,7 +324,7 @@ Users can submit an event to any nodes that have the endpoint open.
         <td>Event Additional Information Length</td>
         <td>uint16</td>
         <td>
-            The length of additional information in bytes. Set to 0 if empty. Max 500 bytes are allowed.
+            The length of additional information in bytes. Set to 0 if empty. Max 2000 bytes are allowed.
         </td>
     </tr>
     <tr>
@@ -440,4 +444,4 @@ This node endpoints should be kept private and only be used by the node operator
 * DELETE `/api/plugins/participation/admin/events/{eventID}`: Can be used by the node operator to remove an event that is being tracked and all the data corresponding to that event.
 * GET `/api/plugins/participation/admin/events/{eventID}/active`: Can be used by the node operator to list all outputs actively participating for the given event.
 * GET `/api/plugins/participation/admin/events/{eventID}/past`: Can be used by the node operator to list all outputs that participated for the given event and are not currently active.
-
+* GET `/api/plugins/participation/admin/events/{eventID}/rewards`: Can be used by the node operator to list all rewards calculated for the given staking event.
