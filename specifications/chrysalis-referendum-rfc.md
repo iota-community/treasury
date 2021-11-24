@@ -45,7 +45,7 @@ The node will ignore any participation for an event that is still upcoming or un
 After the commencing phase is over, the holding phase will begin. During this phase the node will start counting the participation. This counting will happen first on the milestone following the `StartMilestone`, and the last time on the `EndMilestone`. This phase is different between events with ballots and staking events.
 
 #### Ballot events
-Every time a milestone comes in, the node will first update the number of tokens voting for each option on every question (if there were changes in the ledger) and then add this amount to the total count for each option. The addition always adds weight for the following period since token balances cannot change until a new milestone is received. 
+Every time a milestone is confirmed, the node will first update the number of tokens voting for each option on every question (if there were changes in the ledger) and then add this amount to the total count for each option. The addition always adds weight for the following period since token balances cannot change until a new milestone is received. 
 
 This adds a time factor to the vote. If you buy tokens and vote during the ongoing event, you only get weight for the remaining time. Similarly, if you decide to sell, you will miss out on the weight for the remaining time. If you choose to change your opinion, your old opinion will get the weight of the elapsed time since the holding phase started, while your new opinion will get the weight of the remaining time.
 
@@ -59,7 +59,7 @@ To avoid overflowing uint64, the vote power for each participation is calculated
 
 #### Staking events
 
-Every time a milestone comes in, the node will increase the rewarded amount per address according to the staked amount and the configured calculation, i.e. by multiplying the staked amount using the numerator and denominator.
+Every time a milestone is confirmed, the node will increase the rewarded amount per address according to the staked amount and the configured calculation, i.e. by multiplying the staked amount using the numerator and denominator.
 
 ### Ended
 
