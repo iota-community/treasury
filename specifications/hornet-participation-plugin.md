@@ -1,6 +1,10 @@
-+ Feature name: Participation Plugin
-+ Start date: 2021-11-22
-+ RFC PR: To be created...
+# RFC #06: HORNET Participation Plugin
+
+- Feature name: `hornet-participation-plugin`
+- Start date: 2021-11-24
+- RFC PR: [iota-community/treasury#0006](https://github.com/iota-community/treasury/pull/6)
+
+https://github.com/iota-community/treasury/pull/6
 
 # Summary
 
