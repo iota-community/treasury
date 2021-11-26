@@ -420,6 +420,11 @@ Participation data will be sent via the indexation payload of a value transactio
 
 If parsing of the data fails, the participation is ignored.
 
+Validation of the payload passes, if:
+* At least 1 participation exists
+* Each `EventID` is unique.
+
+
 Validation of a singular participation passes, if:
 
 * The ID has been added to the node for tracking
@@ -449,3 +454,4 @@ This node endpoints should be kept private and only be used by the node operator
 * GET `/api/plugins/participation/admin/events/{eventID}/active`: Can be used by the node operator to list all outputs actively participating for the given event.
 * GET `/api/plugins/participation/admin/events/{eventID}/past`: Can be used by the node operator to list all outputs that participated for the given event and are not currently active.
 * GET `/api/plugins/participation/admin/events/{eventID}/rewards`: Can be used by the node operator to list all rewards calculated for the given staking event.
+
