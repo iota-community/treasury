@@ -307,6 +307,13 @@ Users can submit an event to any nodes that have the endpoint open.
                     </td>
                 </tr>
                 <tr>
+                    <td>Required Minimum Rewards</td>
+                    <td>uint64</td>
+                    <td>
+                        The minimum rewards an address needs to reach to be counted in the final result.
+                    </td>
+                </tr>
+                <tr>
                     <td>Additional Information Length</td>
                     <td>uint16</td>
                     <td>
@@ -453,5 +460,5 @@ This node endpoints should be kept private and only be used by the node operator
 * DELETE `/api/plugins/participation/admin/events/{eventID}`: Can be used by the node operator to remove an event that is being tracked and all the data corresponding to that event.
 * GET `/api/plugins/participation/admin/events/{eventID}/active`: Can be used by the node operator to list all outputs actively participating for the given event.
 * GET `/api/plugins/participation/admin/events/{eventID}/past`: Can be used by the node operator to list all outputs that participated for the given event and are not currently active.
-* GET `/api/plugins/participation/admin/events/{eventID}/rewards`: Can be used by the node operator to list all rewards calculated for the given staking event.
+* GET `/api/plugins/participation/admin/events/{eventID}/rewards`: Can be used by the node operator to list all rewards calculated for the given staking event. This endpoint will filter out any addresses not reaching the `Required Minimum Rewards` of the event. This also means that this endpoint will return the corrected total rewarded amount for the event.
 
