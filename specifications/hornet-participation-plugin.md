@@ -12,7 +12,7 @@ This RFC defines a new HORNET plugin that enables token-holders to participate i
 
 # Motivation
 
-[With the IOTA Foundation offering the community the opportunity to decide on the fortune of the unclaimed tokens](https://blog.iota.org/iota-community-treasury-and-genesis-validation), IOTA needs to provide a system for community members to create and vote on ballots. In community calls, the community figured out that the only way to achieve a fair ballot without investing years in R&D would be a simple token-based system. With this idea in mind, any token holders can use their tokens to vote for one of the options on each question, one token, one vote. During the weekly meetings, the majority of the community agreed to have further ongoing community ballots to establish a system and decide on the features of this system through voting. Therefore the system also needs to support future ballots, as well as multiple at the same time. Since the nature of staking is similar, the RFC was extended by this functionality.
+[With the IOTA Foundation offering the community the opportunity to decide on the fortune of the unclaimed tokens](https://blog.iota.org/iota-community-treasury-and-genesis-validation), IOTA and Shimmer needs to provide a system for community members to create and vote on ballots. In community calls, the community figured out that the only way to achieve a fair ballot without investing years in R&D would be a simple token-based system. With this idea in mind, any token holders can use their tokens to vote for one of the options on each question, one token, one vote. During the weekly meetings, the majority of the community agreed to have further ongoing community ballots to establish a system and decide on the features of this system through voting. Therefore the system also needs to support future ballots, as well as multiple at the same time. Since the nature of staking is similar, the RFC was extended by this functionality.
 
 The system describes below tries to address the following points:
 
@@ -59,7 +59,7 @@ Example: Assume Alice has 2i and does not vote at all. Now she sends her tokens 
 *     2i* 5000=10000 for Burn (20%)
 *     Turnout: 50000/70000=71.4% 
 
-To avoid overflowing uint64, the vote power for each participation is calculated as the amount divided by 1000 rounded down. This means that every 1Ki represents 1 vote.
+To avoid overflowing uint64, the vote power for each participation is calculated as the amount divided by 1000 rounded down. This means that every 1Ki / 1000 glow represents 1 vote.
 
 #### Staking events
 
@@ -361,7 +361,7 @@ Participation data will be sent via the indexation payload of a value transactio
 
 ### Criteria for a valid participation transaction
 
-* Must be a valid value transaction adhering to protocol rules (e.g. dust protection)
+* Must be a valid value transaction adhering to protocol rules (e.g. byte costs)
 * Has a singular output going to the same address as all input addresses.
   * Output Type 0 (SigLockedSingleOutput) and Type 1 (SigLockedDustAllowanceOutput) are both valid for this
 * At least one input must come from the same address as the output. Multiple inputs are allowed. This is used to validate ownership of the address.
