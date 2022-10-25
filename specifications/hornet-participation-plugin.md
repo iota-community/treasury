@@ -445,20 +445,20 @@ As `0` never exists as a valid `Answer Value`, it can be used to skip a `Questio
 
 ## Public Node endpoints
 
-* GET `/api/plugins/participation/events`: Lists all events, returning their EventID. Optional `type` query parameter to filter by payload type.
-* GET `/api/plugins/participation/events/{eventID}`: Returns the event information as a JSON payload.
-* GET `/api/plugins/participation/events/{eventID}/status`: Returns the status of the given event `(upcoming,commencing,holding,ended)` and if it contains a `Ballot`, the current and accumulated answers for each question. For `Staking` events it contains the amount of funds currently staking and the amount of tokens rewarded.
-* GET `/api/plugins/participation/outputs/{outputID}`: Returns the events the given output is participating in or participated in the past if the output was spent.
-* GET `/api/plugins/participation/addresses/{bech32Address}`: Returns the staking events the address participated in and the amount of rewards received.
-* GET `/api/plugins/participation/addresses/ed25519/{ed25519Address}`: Returns the staking events the address participated in and the amount of rewards received.
+* GET `/api/participation/v1/events`: Lists all events, returning their EventID. Optional `type` query parameter to filter by payload type.
+* GET `/api/participation/v1/events/{eventID}`: Returns the event information as a JSON payload.
+* GET `/api/participation/v1/events/{eventID}/status`: Returns the status of the given event `(upcoming,commencing,holding,ended)` and if it contains a `Ballot`, the current and accumulated answers for each question. For `Staking` events it contains the amount of funds currently staking and the amount of tokens rewarded.
+* GET `/api/participation/v1/outputs/{outputID}`: Returns the events the given output is participating in or participated in the past if the output was spent.
+* GET `/api/participation/v1/addresses/{bech32Address}`: Returns the staking events the address participated in and the amount of rewards received.
+* GET `/api/participation/v1/addresses/{bech32Address}/outputs`: Returns the outputs participating in events for the given address.
 
 ## Private Node endpoints
 
 This node endpoints should be kept private and only be used by the node operators.
 
-* POST `/api/plugins/participation/admin/events`: Can be used by the node operator to add a new event to the node for tracking. Events that already started or event already ended can be added, as long as the node has enough history to calculate the participation.
-* DELETE `/api/plugins/participation/admin/events/{eventID}`: Can be used by the node operator to remove an event that is being tracked and all the data corresponding to that event.
-* GET `/api/plugins/participation/admin/events/{eventID}/active`: Can be used by the node operator to list all outputs actively participating for the given event.
-* GET `/api/plugins/participation/admin/events/{eventID}/past`: Can be used by the node operator to list all outputs that participated for the given event and are not currently active.
-* GET `/api/plugins/participation/admin/events/{eventID}/rewards`: Can be used by the node operator to list all rewards calculated for the given staking event. This endpoint will filter out any addresses not reaching the `Required Minimum Rewards` of the event. This also means that this endpoint will return the corrected total rewarded amount for the event.
+* POST `/api/participation/v1/admin/events`: Can be used by the node operator to add a new event to the node for tracking. Events that already started or event already ended can be added, as long as the node has enough history to calculate the participation.
+* DELETE `/api/participation/v1/admin/events/{eventID}`: Can be used by the node operator to remove an event that is being tracked and all the data corresponding to that event.
+* GET `/api/participation/v1/admin/events/{eventID}/active`: Can be used by the node operator to list all outputs actively participating for the given event.
+* GET `/api/participation/v1/admin/events/{eventID}/past`: Can be used by the node operator to list all outputs that participated for the given event and are not currently active.
+* GET `/api/participation/v1/admin/events/{eventID}/rewards`: Can be used by the node operator to list all rewards calculated for the given staking event. This endpoint will filter out any addresses not reaching the `Required Minimum Rewards` of the event. This also means that this endpoint will return the corrected total rewarded amount for the event.
 
